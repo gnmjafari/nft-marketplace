@@ -1,16 +1,26 @@
 import { NextPage } from "next";
 import RootLayout from "./layout";
-import Navbar from "@/components/navbar/Navbar";
+import { Navbar, NftList } from "@/components";
+import nfts from "../content/meta.json";
+import { nftMeta } from "@/types/nft";
 
-const page: NextPage = () => {
+const Home: NextPage = () => {
   return (
     <RootLayout>
       <Navbar />
-      <div className="max-w-7xl mx-auto px-4 space-y-8 sm:px-6 lg:px-8">
-        <div>Hello world!</div>
+      <div className="relative py-24 max-w-7xl mx-auto px-4 space-y-8 sm:px-6 lg:px-8">
+        <div className="text-center">
+          <h2 className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+            Amazing Creatures NFTs
+          </h2>
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+            Mint a NFT to get unlimited ownership forever!
+          </p>
+        </div>
+        <NftList nfts={nfts as nftMeta[]} />
       </div>
     </RootLayout>
   );
 };
 
-export default page;
+export default Home;

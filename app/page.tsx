@@ -8,10 +8,10 @@ const Home: NextPage = () => {
     <BaseLayout>
       <div className="relative">
         <div className="text-center">
-          <div className="text-3xl tracking-tight font-extrabold text-gray-900 sm:text-4xl">
+          <div className="text-3xl tracking-tight font-extrabold text-gray-300 sm:text-4xl">
             Amazing Creatures NFTs
           </div>
-          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-500 sm:mt-4">
+          <p className="mt-3 max-w-2xl mx-auto text-xl text-gray-400 sm:mt-4">
             Mint a NFT to get unlimited ownership forever!
           </p>
         </div>

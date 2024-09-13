@@ -1,5 +1,7 @@
+"use client";
 import { FunctionComponent } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const navigation = [
   { name: "Marketplace", href: "/", current: true },
@@ -7,8 +9,9 @@ const navigation = [
 ];
 
 const Navbar: FunctionComponent = () => {
+  const pathname = usePathname();
   return (
-    <div className="navbar bg-gray-900">
+    <div className="navbar bg-gray-800">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -31,32 +34,29 @@ const Navbar: FunctionComponent = () => {
             tabIndex={0}
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
-            <li>
-              <a>Item 1</a>
-            </li>
-            <li>
-              <a>Parent</a>
-              <ul className="p-2">
-                <li>
-                  <a>Submenu 1</a>
+            {navigation.map((menu, key) => {
+              return (
+                <li key={key}>
+                  <Link href={menu.href}>{menu.name}</Link>
                 </li>
-                <li>
-                  <a>Submenu 2</a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <a>Item 3</a>
-            </li>
+              );
+            })}
           </ul>
         </div>
         <a className="btn btn-ghost text-xl">daisyUI</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1">
+        <ul className="menu menu-horizontal px-1 gap-3">
           {navigation.map((menu, key) => {
             return (
-              <li key={key}>
+              <li
+                key={key}
+                className={`${
+                  pathname === menu.href
+                    ? "bg-gray-900 rounded-lg text-indigo-600  font-bold"
+                    : "bg-transparent"
+                }`}
+              >
                 <Link href={menu.href}>{menu.name}</Link>
               </li>
             );
@@ -82,16 +82,10 @@ const Navbar: FunctionComponent = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
           >
             <li>
-              <a className="justify-between">
+              <Link href="/profile" className="justify-between">
                 Profile
-                <span className="badge">New</span>
-              </a>
-            </li>
-            <li>
-              <a>Settings</a>
-            </li>
-            <li>
-              <a>Logout</a>
+                <span className="badge">connected</span>
+              </Link>
             </li>
           </ul>
         </div>

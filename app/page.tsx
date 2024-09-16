@@ -1,9 +1,24 @@
+"use client";
 import { NextPage } from "next";
-import { BaseLayout, NftList } from "@/components";
+import { BaseLayout, NftList } from "@ui";
 import nfts from "../content/meta.json";
-import { nftMeta } from "@/types/nft";
+import { nftMeta } from "@_types/nft";
+import { useWeb3 } from "@/components/providers/web3/web3";
 
 const Home: NextPage = () => {
+  const { ethereum, provider } = useWeb3();
+  console.log("ethereum", ethereum);
+  console.log("provider", provider);
+
+  const getAccount = async () => {
+    const accounts = await provider!.listAccounts();
+    console.log(accounts[0]);
+  };
+
+  if (provider) {
+    getAccount();
+  }
+
   return (
     <BaseLayout>
       <div className="relative">

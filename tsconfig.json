@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "baseUrl":".",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
@@ -11,14 +12,20 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "incremental": true,
+    "incremental": true,   
     "plugins": [
       {
         "name": "next"
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@ui":["components/ui"],
+      "@ui/*":["components/ui/*"],
+      "@providers":["components/providers"],
+      "@providers/*":["components/providers/*"],
+      "@ui/*":["components/ui/*"],
+      "@_types/*":["types/*"],
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],

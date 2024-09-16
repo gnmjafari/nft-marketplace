@@ -1,4 +1,4 @@
-import { BaseLayout } from "@/components";
+import { BaseLayout } from "@ui";
 import { NextPage } from "next";
 
 const Profile: NextPage = () => {

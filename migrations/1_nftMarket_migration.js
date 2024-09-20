@@ -1,5 +1,5 @@
 const NftMarket = artifacts.require("NftMarket");
 
-module.exports = function (deployer) {
-  deployer.deploy(NftMarket);
+module.exports = async function (deployer) {
+  await deployer.deploy(NftMarket);
 };

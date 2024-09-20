@@ -1,6 +1,7 @@
 module.exports = {
+  contracts_build_directory: "./public/contracts",
   networks: {
-    development: {
+    ganache: {
       host: "127.0.0.1",
       port: 7545,
       network_id: "*",
@@ -8,7 +9,8 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.21",
+      version: "0.8.20", // Specify the compiler version
+      settings: { evmVersion: "london" },
     },
   },
 };

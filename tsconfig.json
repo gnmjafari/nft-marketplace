@@ -24,6 +24,8 @@
       "@ui/*":["components/ui/*"],
       "@providers":["components/providers"],
       "@providers/*":["components/providers/*"],
+      "@hooks":["components/hooks"],
+      "@hooks/*":["components/hooks/*"],
       "@ui/*":["components/ui/*"],
       "@_types/*":["types/*"],
     }

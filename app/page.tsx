@@ -3,21 +3,40 @@ import { NextPage } from "next";
 import { BaseLayout, NftList } from "@ui";
 import nfts from "../content/meta.json";
 import { nftMeta } from "@_types/nft";
-import { useWeb3 } from "@/components/providers/web3/web3";
+// import { useWeb3 } from "@/components/providers/web3/web3";
 
 const Home: NextPage = () => {
-  const { ethereum, provider } = useWeb3();
-  console.log("ethereum", ethereum);
-  console.log("provider", provider);
+  // const { provider } = useWeb3();
 
-  const getAccount = async () => {
-    const accounts = await provider!.listAccounts();
-    console.log(accounts[0]);
-  };
+  // const getNftInfo = async () => {
+  //   if (!contract) {
+  //     console.error("Contract is not initialized.");
+  //     return;
+  //   }
 
-  if (provider) {
-    getAccount();
-  }
+  //   try {
+  //     const name = await contract.name();
+  //     console.log("Contract Name:", name);
+
+  //     const symbol = await contract.symbol();
+  //     console.log("Contract Symbol:", symbol);
+  //   } catch (error) {
+  //     console.error("Error fetching NFT info:", error);
+  //   }
+  // };
+
+  // if (contract) {
+  //   getNftInfo();
+  // }
+
+  // const getAccount = async () => {
+  //   const accounts = await provider!.listAccounts();
+  //   console.log(accounts[0]);
+  // };
+
+  // if (provider) {
+  //   getAccount();
+  // }
 
   return (
     <BaseLayout>

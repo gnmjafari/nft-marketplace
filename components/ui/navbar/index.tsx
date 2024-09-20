@@ -2,6 +2,7 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { useAccount } from "@/components/hooks/web3/useAccount";
 
 const navigation = [
   { name: "Marketplace", href: "/", current: true },
@@ -10,6 +11,10 @@ const navigation = [
 
 const Navbar: FunctionComponent = () => {
   const pathname = usePathname();
+  const { account } = useAccount();
+
+  console.log("account:", account);
+
   return (
     <div className="navbar bg-gray-800">
       <div className="navbar-start">
@@ -64,6 +69,14 @@ const Navbar: FunctionComponent = () => {
         </ul>
       </div>
       <div className="navbar-end">
+        <button
+          onClick={() => {
+            account.connect();
+          }}
+          className="btn btn-sm btn-accent"
+        >
+          Connect Wallet
+        </button>
         <div className="dropdown dropdown-end">
           <div
             tabIndex={0}

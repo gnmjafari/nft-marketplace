@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import {
   createContext,
@@ -7,7 +8,12 @@ import {
   useEffect,
   useState,
 } from "react";
-import { createDefaultState, Web3State } from "./utils";
+import {
+  createDefaultState,
+  createWeb3State,
+  loadContract,
+  Web3State,
+} from "./utils";
 import { ethers } from "ethers";
 
 type props = {
@@ -21,18 +27,24 @@ export const Web3Provider: FunctionComponent<props> = ({ children }) => {
 
   useEffect(() => {
     async function initWeb3() {
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      const provider = new ethers.BrowserProvider(window.ethereum as any);
+      try {
+        const provider = new ethers.BrowserProvider(window.ethereum as any);
+        const contract = await loadContract("NftMarket", provider);
 
-      const signer = await provider.getSigner();
-      console.log("Signer address:", await signer.getAddress());
-
-      setWeb3Api({
-        ethereum: window.ethereum,
-        provider,
-        contract: null,
-        isLoading: false,
-      });
+        setWeb3Api(
+          createWeb3State({
+            ethereum: window.ethereum,
+            provider,
+            contract,
+            isLoading: false,
+          })
+        );
+      } catch (error: any) {
+        console.error("error.message:", error.message);
+        setWeb3Api((api) =>
+          createWeb3State({ ...(api as any), isLoading: false })
+        );
+      }
     }
     initWeb3();
   }, []);
@@ -49,3 +61,8 @@ export const useWeb3 = () => {
   }
   return context;
 };
+
+export function useHooks() {
+  const { hooks } = useWeb3();
+  return hooks;
+}

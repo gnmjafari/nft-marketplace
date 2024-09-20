@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useAccount } from "@/components/hooks/web3/useAccount";
 import WalletBar from "./WalletBar";
+import { useNetwork } from "@/components/hooks/web3/useNetwork";
 
 const navigation = [
   { name: "Marketplace", href: "/", current: true },
@@ -13,7 +14,8 @@ const navigation = [
 const Navbar: FunctionComponent = () => {
   const pathname = usePathname();
   const { account } = useAccount();
-  console.log("account", account);
+  const { network } = useNetwork();
+  console.log("network :", network);
 
   return (
     <div className="navbar bg-gray-800">
@@ -48,27 +50,43 @@ const Navbar: FunctionComponent = () => {
             })}
           </ul>
         </div>
-        <a className="btn btn-ghost text-xl">daisyUI</a>
+        <a className="btn btn-ghost text-xl">Marketplace NFT</a>
+        <div className=" hidden lg:flex">
+          <ul className="menu menu-horizontal px-1 gap-3">
+            {navigation.map((menu, key) => {
+              return (
+                <li
+                  key={key}
+                  className={`${
+                    pathname === menu.href
+                      ? "bg-gray-900 rounded-lg text-indigo-600  font-bold"
+                      : "bg-transparent"
+                  }`}
+                >
+                  <Link href={menu.href}>{menu.name}</Link>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       </div>
-      <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-3">
-          {navigation.map((menu, key) => {
-            return (
-              <li
-                key={key}
-                className={`${
-                  pathname === menu.href
-                    ? "bg-gray-900 rounded-lg text-indigo-600  font-bold"
-                    : "bg-transparent"
-                }`}
-              >
-                <Link href={menu.href}>{menu.name}</Link>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+
       <div className="navbar-end">
+        {account.isInstalled && (
+          <button className="btn btn-sm mx-2 ">
+            <div className="badge badge-secondary">{network.data}</div>
+            Is supported :
+            <div className="badge badge-secondary">{`${network.isSupported}`}</div>
+            {!network.isSupported && (
+              <>
+                Target :
+                <div className="badge badge-secondary">
+                  {network.targetNetwork}
+                </div>
+              </>
+            )}
+          </button>
+        )}
         <WalletBar
           isLoading={account.isLoading}
           isInstalled={account.isInstalled}

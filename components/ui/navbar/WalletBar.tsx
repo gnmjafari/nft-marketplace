@@ -59,7 +59,7 @@ const WalletBar: FunctionComponent<WalletBarProps> = ({
         onClick={() => {
           connect();
         }}
-        className="btn btn-sm btn-accent"
+        className="btn btn-sm "
       >
         Connect Wallet
       </button>

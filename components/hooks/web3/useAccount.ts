@@ -29,7 +29,7 @@ export const hookFactory: AccountHookFactory =
         }
         return account;
       },
-      { revalidateOnFocus: false }
+      { revalidateOnFocus: false, shouldRetryOnError: false }
     );
 
     const handleAccountChanged = (...args: unknown[]) => {
@@ -61,7 +61,7 @@ export const hookFactory: AccountHookFactory =
       mutate,
       data: data?.address,
       isValidating,
-      isLoading: isLoading || isValidating,
+      isLoading: isLoading as boolean,
       isInstalled: ethereum?.isMetaMask || false,
       connect,
     };

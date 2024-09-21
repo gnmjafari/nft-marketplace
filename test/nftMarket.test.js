@@ -5,7 +5,6 @@ contract("NftMarket", (accounts) => {
 
   before(async () => {
     _contract = await NftMarket.deployed();
-    console.log("accounts", accounts);
   });
 
   describe("Mint token", () => {
@@ -23,6 +22,12 @@ contract("NftMarket", (accounts) => {
         accounts[0],
         "owner of token is not matching address[0]"
       );
+    });
+
+    it("first token should point the correct tokenURI", async () => {
+      const actualTokenURI = await _contract.tokenURI(1);
+
+      assert.equal(actualTokenURI, tokenURI, "tokenURI is not correctly set");
     });
   });
 });

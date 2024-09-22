@@ -59,4 +59,32 @@ contract("NftMarket", (accounts) => {
       assert.equal(nftItem.isListed, true, "token is not listed");
     });
   });
+
+  describe("Buy NFT", () => {
+    before(async () => {
+      await _contract.buyNft(1, {
+        from: accounts[1],
+        value: _nftPrice,
+      });
+    });
+
+    it("should un list the item", async () => {
+      const listedItem = await _contract.getNftItem(1);
+      assert.equal(listedItem.isListed, false, "Item is still listed");
+    });
+
+    it("should decrease listed items count", async () => {
+      const listedItemCount = await _contract.listedItemsCount();
+      assert.equal(
+        listedItemCount.toNumber(),
+        0,
+        "Count has not been decrement"
+      );
+    });
+
+    it("should change the owner", async () => {
+      const currentOwner = await _contract.ownerOf(1);
+      assert.equal(currentOwner, accounts[1], "change the owner is wrong");
+    });
+  });
 });

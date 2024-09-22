@@ -9,12 +9,51 @@ contract NftMarket is ERC721URIStorage {
     uint256 private _listedItems;
     uint256 private _tokenIds;
 
+    struct NftItem {
+        uint tokenId;
+        uint price;
+        address creator;
+        bool isListed;
+    }
+
+    uint public listingPrice = 0.25 ether;
+
     mapping(string => bool) private _usedTokenURIs;
+    mapping(uint => NftItem) private _idToNftItem;
+
+    event NftItemCreated(
+        uint tokenId,
+        uint price,
+        address creator,
+        bool isListed
+    );
 
     constructor() ERC721("CreaturesNFT", "CNFT") {}
 
-    function mintToken(string memory tokenURI) public payable returns (uint) {
-        require(tokenURIExist(tokenURI), "Token URI already exists");
+    function tokenURIExist(string memory tokenURI) public view returns (bool) {
+        return _usedTokenURIs[tokenURI] == true;
+    }
+
+    function createNftItem(uint tokenId, uint price) private {
+        require(price > 0, "price most be at least 1 wei");
+        _idToNftItem[tokenId] = NftItem(tokenId, price, msg.sender, true);
+        emit NftItemCreated(tokenId, price, msg.sender, true);
+    }
+
+    function getNftItem(uint tokenId) public view returns (NftItem memory) {
+        return _idToNftItem[tokenId];
+    }
+
+    function listedItemsCount() public view returns (uint) {
+        return _listedItems;
+    }
+
+    function mintToken(
+        string memory tokenURI,
+        uint price
+    ) public payable returns (uint) {
+        require(!tokenURIExist(tokenURI), "Token URI already exists");
+        require(msg.value == listingPrice, "Price must be equal listing price");
 
         _tokenIds++;
         _listedItems++;
@@ -24,11 +63,8 @@ contract NftMarket is ERC721URIStorage {
         _safeMint(msg.sender, newTokenId);
         _setTokenURI(newTokenId, tokenURI);
         _usedTokenURIs[tokenURI] = true;
+        createNftItem(newTokenId, price);
 
         return newTokenId;
-    }
-
-    function tokenURIExist(string memory tokenURI) public view returns (bool) {
-        return _usedTokenURIs[tokenURI] == true;
     }
 }

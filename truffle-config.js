@@ -9,7 +9,7 @@ module.exports = {
   },
   compilers: {
     solc: {
-      version: "0.8.20", // Specify the compiler version
+      version: "0.8.20", 
       settings: { evmVersion: "london" },
     },
   },

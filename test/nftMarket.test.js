@@ -147,4 +147,24 @@ contract("NftMarket", (accounts) => {
       assert.equal(ownedNfts.length, 2, "Invalid length of tokens");
     });
   });
+
+  describe("List an Nft", () => {
+    before(async () => {
+      await _contract.placeNftOnSale(1, _nftPrice, {
+        from: accounts[1],
+        value: _listingPrice,
+      });
+    });
+
+    it("should have tow listed items", async () => {
+      const listedNfts = await _contract.getAllNftsOnSale();
+      assert.equal(listedNfts.length, 2, "Invalid length of Nfts");
+    });
+
+    it("should set new listing price", async () => {
+      await _contract.setListingPrice(_listingPrice, { from: accounts[0] });
+      const listingPrice = await _contract.listingPrice();
+      assert.equal(listingPrice, _listingPrice, "Invalid price");
+    });
+  });
 });

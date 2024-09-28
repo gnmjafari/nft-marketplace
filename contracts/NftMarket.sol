@@ -4,8 +4,9 @@ pragma solidity 0.8.20;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
 
-contract NftMarket is ERC721URIStorage {
+contract NftMarket is ERC721URIStorage, Ownable {
     uint256 private _listedItems;
     uint256 private _tokenIds;
     uint256[] private _allNfts;
@@ -32,7 +33,12 @@ contract NftMarket is ERC721URIStorage {
         bool isListed
     );
 
-    constructor() ERC721("CreaturesNFT", "CNFT") {}
+    constructor() ERC721("CreaturesNFT", "CNFT") Ownable(_msgSender()) {}
+
+    function setListingPrice(uint newPrice) external onlyOwner {
+        require(newPrice > 0, "price must be at least 1 wei");
+        listingPrice = newPrice;
+    }
 
     function tokenURIExist(string memory tokenURI) public view returns (bool) {
         return _usedTokenURIs[tokenURI] == true;
@@ -90,6 +96,26 @@ contract NftMarket is ERC721URIStorage {
         _idToNftItem[tokenId] = NftItem(tokenId, price, msg.sender, true);
 
         emit NftItemCreated(tokenId, price, msg.sender, true);
+    }
+
+    function placeNftOnSale(uint tokenId, uint newPrice) public payable {
+        require(
+            _ownerOf(tokenId) == _msgSender(),
+            "you are not owner of this nft"
+        );
+        require(
+            _idToNftItem[tokenId].isListed == false,
+            "Item is aleady on sale"
+        );
+
+        require(
+            msg.value == listingPrice,
+            "price must be equal to listing price"
+        );
+
+        _idToNftItem[tokenId].isListed = true;
+        _idToNftItem[tokenId].price = newPrice;
+        _listedItems += 1;
     }
 
     function getNftItem(uint tokenId) public view returns (NftItem memory) {

@@ -171,7 +171,7 @@ contract NftMarket is ERC721URIStorage {
 
     function _addTokenToOwnerEnumeration(address to, uint tokenId) private {
         uint length = ERC721.balanceOf(to);
-        if(length > 0){
+        if (length > 0) {
             length -= 1;
         }
         _ownedTokens[to][length] = tokenId;
@@ -203,35 +203,5 @@ contract NftMarket is ERC721URIStorage {
 
         delete _idToNftIndex[tokenId];
         _allNfts.pop();
-    }
-
-    // test function
-
-    function getBalanceByAddress(address owner) public view returns (uint) {
-        uint balance = ERC721.balanceOf(owner);
-        return balance;
-    }
-
-    function getAllNfts() public view returns (uint[] memory) {
-        return _allNfts;
-    }
-
-    function get_listedItems() public view returns (uint256) {
-        return _listedItems;
-    }
-
-    function getOwnerOf(uint tokenId) public view returns (address) {
-        address owner = ERC721.ownerOf(tokenId);
-        return owner;
-    }
-
-    function check_update(address to, uint tokenId) public returns (address) {
-        address previousOwner = _update(to, tokenId, address(0));
-        return previousOwner;
-    }
-
-    function check__idToNftIndex(uint tokenId) public returns (uint) {
-        uint NftIndex = _idToNftIndex[tokenId];
-        return NftIndex;
     }
 }

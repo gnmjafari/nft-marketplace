@@ -76,9 +76,6 @@ contract NftMarket is ERC721URIStorage {
         uint ownedItemsCount = ERC721.balanceOf(_msgSender());
         NftItem[] memory items = new NftItem[](ownedItemsCount);
 
-        // uint tokenId = tokenOfOwnerByIndex(msg.sender, 0);
-        // NftItem storage item = _idToNftItem[tokenId];
-        // items[0] = item;
         for (uint i = 0; i < ownedItemsCount; i++) {
             uint tokenId = tokenOfOwnerByIndex(_msgSender(), i);
             NftItem storage item = _idToNftItem[tokenId];
@@ -131,11 +128,9 @@ contract NftMarket is ERC721URIStorage {
         require(_msgSender() != owner, "You already own this NFT");
         require(msg.value == price, "Please, submit the asking price");
 
-        // Update the NFT state before transfer
         _idToNftItem[tokenId].isListed = false;
         _listedItems -= 1;
 
-        // Safely transfer the NFT
         _safeTransfer(owner, _msgSender(), tokenId);
         payable(owner).transfer(msg.value);
     }
@@ -149,15 +144,13 @@ contract NftMarket is ERC721URIStorage {
 
         if (previousOwner == address(0)) {
             _addTokenToAllTokensEnumeration(tokenId);
+        } else if (previousOwner != to) {
+            _removeTokenFromOwnerEnumeration(previousOwner, tokenId);
         }
-        // else if (previousOwner != to) {
-        //     _removeTokenFromOwnerEnumeration(previousOwner, tokenId);
-        // }
 
-        // if (to == address(0)) {
-        //     _removeTokenFromAllTokensEnumeration(tokenId);
-        // } else
-        if (to != previousOwner) {
+        if (to == address(0)) {
+            _removeTokenFromAllTokensEnumeration(tokenId);
+        } else if (to != previousOwner) {
             _addTokenToOwnerEnumeration(to, tokenId);
         }
 
@@ -182,7 +175,7 @@ contract NftMarket is ERC721URIStorage {
         address from,
         uint tokenId
     ) private {
-        uint lastTokenIndex = ERC721.balanceOf(from); // مشکل اینه
+        uint lastTokenIndex = ERC721.balanceOf(from);
         uint tokenIndex = _idToNftIndex[tokenId];
         if (tokenIndex != lastTokenIndex) {
             uint lastTokenId = _ownedTokens[from][lastTokenIndex];

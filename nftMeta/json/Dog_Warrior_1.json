@@ -1,0 +1,19 @@
+{
+  "description": "OGANGE FUR, CYBER DOG WARRIOR PORTRAIT",
+  "image": "https://tomato-fresh-kangaroo-585.mypinata.cloud/ipfs/QmVxqYmMBdVxpZpsf95d1EnEgESrMVNQpHthgECuHyYpq2",
+  "name": "Dog Warrior",
+  "attributes": [
+    {
+      "trait_type": "attack",
+      "value": "50"
+    },
+    {
+      "trait_type": "health",
+      "value": "70"
+    },
+    {
+      "trait_type": "speed",
+      "value": "50"
+    }
+  ]
+}

@@ -1,0 +1,19 @@
+{
+  "description": "OGANGE FUR, CYBER CAT WARRIOR PORTRAIT",
+  "image": "https://tomato-fresh-kangaroo-585.mypinata.cloud/ipfs/QmQXSmhGTQHNR9cpamvt8Agbd6QFPEe1egeAvw586xuw2b",
+  "name": "Cat warrior",
+  "attributes": [
+    {
+      "trait_type": "attack",
+      "value": "20"
+    },
+    {
+      "trait_type": "health",
+      "value": "100"
+    },
+    {
+      "trait_type": "speed",
+      "value": "30"
+    }
+  ]
+}

@@ -16,6 +16,7 @@ import {
 } from "./utils";
 import { ethers } from "ethers";
 import { MetaMaskInpageProvider } from "@metamask/providers";
+import { NftMarketContract } from "@/types/nftMarketContract";
 
 const pageReload = () => {
   window.location.reload();
@@ -57,7 +58,7 @@ export const Web3Provider: FunctionComponent<props> = ({ children }) => {
           createWeb3State({
             ethereum: window.ethereum,
             provider,
-            contract,
+            contract: contract as unknown as NftMarketContract,
             isLoading: false,
           })
         );

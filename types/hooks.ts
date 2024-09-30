@@ -1,11 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { MetaMaskInpageProvider } from "@metamask/providers";
-import { Contract, ethers } from "ethers";
+import { ethers } from "ethers";
 import { SWRResponse } from "swr";
+import { NftMarketContract } from "./nftMarketContract";
 
 export type Web3Dependencies = {
   provider: ethers.BrowserProvider;
-  contract: Contract;
+  contract: NftMarketContract;
   ethereum: MetaMaskInpageProvider;
   isLoading: boolean;
 };

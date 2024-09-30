@@ -1,7 +1,22 @@
+"use client";
+import { useOwnedNfts } from "@/components/hooks/web3/useOwnedNfts";
+import { Nft } from "@/types/nft";
 import { BaseLayout } from "@ui";
 import { NextPage } from "next";
+import { Fragment, useEffect, useState } from "react";
 
 const Profile: NextPage = () => {
+  const { nfts } = useOwnedNfts();
+  const [activeNft, setActiveNft] = useState<Nft>();
+
+  useEffect(() => {
+    if (nfts.data && nfts.data.length > 0) {
+      setActiveNft(nfts.data[0]);
+    }
+
+    return () => setActiveNft(undefined);
+  }, [nfts.data]);
+
   return (
     <BaseLayout>
       <div className="card p-10 flex-row justify-center items-start gap-20">
@@ -11,57 +26,63 @@ const Profile: NextPage = () => {
             Your Collection
           </div>
           <div className="pl-10 max-w-lg mx-auto  grid gap-5 lg:grid-cols-3 lg:max-w-none">
-            <div className="card bg-base-100 w-52 shadow-xl">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body p-2">
-                <h2 className="card-title">Shoes!</h2>
-              </div>
-            </div>
-            <div className="card bg-base-100 w-52 shadow-xl">
-              <figure>
-                <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body p-2">
-                <h2 className="card-title">Shoes!</h2>
-              </div>
-            </div>
+            {(nfts.data as Nft[]).map((item, index) => {
+              return (
+                <div
+                  className={`card bg-base-100 w-52 shadow-xl cursor-pointer ${
+                    item.tokenId == activeNft?.tokenId
+                      ? "border-4 border-indigo-700 p-2"
+                      : ""
+                  }`}
+                  key={`${index}_${item.tokenId}`}
+                  onClick={() => {
+                    setActiveNft(item);
+                  }}
+                >
+                  <figure>
+                    <img src={item.meta.image} alt={item.meta.name} />
+                  </figure>
+                  <div className="card-body items-center justify-center p-1">
+                    <h2 className="card-title text-ellipsis">
+                      {item.meta.name}
+                    </h2>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
         <div className="w-1/3">
-          <div className="card bg-base-100 w-full shadow-xl">
-            <figure>
-              <img
-                src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
-                alt="Shoes"
-              />
-            </figure>
-            <div className="card-body">
-              <h2 className="card-title">Shoes!</h2>
-              <p>fierce violet</p>
-              <h2 className="card-title">Information</h2>
-              <div className="divider my-1" />
-              <p>Attack:</p>
-              <div className="divider my-1" />
-              <p>Health</p>
-              <div className="divider my-1" />
-              <p>Speed</p>
-              <div className="divider my-1" />
-              <div className="flex justify-between items-center">
-                <button className="btn btn-primary">Download Image</button>
-                <button className="btn btn-outline btn-primary">
-                  Transfer
-                </button>
+          {activeNft && (
+            <div className="card bg-base-100 w-full shadow-xl">
+              <figure>
+                <img src={activeNft.meta.image} alt={activeNft.meta.name} />
+              </figure>
+              <div className="card-body">
+                <h2 className="card-title">{activeNft.meta.name}</h2>
+                <p>{activeNft.meta.description}</p>
+                <h2 className="card-title">Information</h2>
+                <div className="divider my-1" />
+                {activeNft.meta.attributes.map((attribute, key) => {
+                  return (
+                    <Fragment key={key}>
+                      <p>
+                        {attribute.trait_type}: {attribute.value}
+                      </p>
+                      <div className="divider my-1" />
+                    </Fragment>
+                  );
+                })}
+
+                <div className="flex justify-between items-center">
+                  <button className="btn btn-primary">Download Image</button>
+                  <button className="btn btn-outline btn-primary">
+                    Transfer
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          )}
         </div>
       </div>
     </BaseLayout>

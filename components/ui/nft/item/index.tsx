@@ -16,15 +16,19 @@ const NftItem: FunctionComponent<NftItemProps> = ({ item }) => {
         <h2 className="card-title">{item.meta.name}</h2>
         <p>{item.meta.description}</p>
         <div className="flex justify-between">
+          <div className="flex flex-col py-4">
+            <dt>Price</dt>
+            <dd className="font-bold text-indigo-700">{item.price} ETH</dd>
+          </div>
           {item.meta.attributes.map((attribute, key) => (
             <div key={key} className="flex flex-col py-4">
               <dt>{attribute.trait_type}</dt>
-              <dd>{attribute.value}</dd>
+              <dd className="font-bold text-indigo-700">{attribute.value}</dd>
             </div>
           ))}
         </div>
-        <div className="card-actions justify-end">
-          <button className="btn btn-primary">Buy Now</button>
+        <div className="card-actions justify-start">
+          <button className="btn btn-sm btn-primary">Buy Now</button>
         </div>
       </div>
     </div>

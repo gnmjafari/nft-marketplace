@@ -2,42 +2,11 @@
 import { NextPage } from "next";
 import { BaseLayout, NftList } from "@ui";
 import { useListedNfts } from "@/components/hooks/web3/useListedNfts";
+import { Nft } from "@/types/nft";
 
 const Home: NextPage = () => {
   const { nfts } = useListedNfts();
   console.log("nfts", nfts.data);
-
-  // const { provider } = useWeb3();
-
-  // const getNftInfo = async () => {
-  //   if (!contract) {
-  //     console.error("Contract is not initialized.");
-  //     return;
-  //   }
-
-  //   try {
-  //     const name = await contract.name();
-  //     console.log("Contract Name:", name);
-
-  //     const symbol = await contract.symbol();
-  //     console.log("Contract Symbol:", symbol);
-  //   } catch (error) {
-  //     console.error("Error fetching NFT info:", error);
-  //   }
-  // };
-
-  // if (contract) {
-  //   getNftInfo();
-  // }
-
-  // const getAccount = async () => {
-  //   const accounts = await provider!.listAccounts();
-  //   console.log(accounts[0]);
-  // };
-
-  // if (provider) {
-  //   getAccount();
-  // }
 
   return (
     <BaseLayout>
@@ -50,7 +19,7 @@ const Home: NextPage = () => {
             Mint a NFT to get unlimited ownership forever!
           </p>
         </div>
-        <NftList nfts={nfts.data} />
+        <NftList nfts={nfts.data as Nft[]} />
       </div>
     </BaseLayout>
   );

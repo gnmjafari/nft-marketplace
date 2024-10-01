@@ -76,8 +76,16 @@ const Profile: NextPage = () => {
 
                 <div className="flex justify-between items-center">
                   <button className="btn btn-primary">Download Image</button>
-                  <button className="btn btn-outline btn-primary">
-                    Transfer
+                  <button
+                    disabled={activeNft.isListed}
+                    onClick={() => {
+                      nfts.listNft(activeNft.tokenId, activeNft.price);
+                    }}
+                    className={`btn btn-outline btn-primary ${
+                      activeNft.isListed && "btn-disabled"
+                    }`}
+                  >
+                    {activeNft.isListed ? "Nft is listed" : "List Nft"}
                   </button>
                 </div>
               </div>

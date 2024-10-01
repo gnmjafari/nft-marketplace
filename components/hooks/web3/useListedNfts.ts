@@ -2,10 +2,13 @@
 import { useHooks } from "@/components/providers/web3/web3";
 import { CryptoHookFactory } from "@/types/hooks";
 import { Nft } from "@/types/nft";
-import { formatEther } from "ethers";
+import { formatEther, parseEther } from "ethers";
+import { useCallback } from "react";
 import useSWR from "swr";
 
-type UseListedNftsResponse = object;
+type UseListedNftsResponse = {
+  buyNft: (tokenId: number, value: number) => void;
+};
 
 type ListedNftsHookFactory = CryptoHookFactory<Nft[], UseListedNftsResponse>;
 
@@ -20,24 +23,12 @@ export const hookFactory: ListedNftsHookFactory =
         const nfts = [] as Nft[];
         const coreNfts = await contract!.getAllNftsOnSale();
 
-        console.log("coreNfts", coreNfts.length);
-
         for (let i = 0; i < coreNfts.length; i++) {
           const item = coreNfts[i];
           const tokenURI = await contract!.tokenURI(item.tokenId);
-
           const metaRes = await fetch(tokenURI);
-
-          console.log("metaRes", metaRes);
-
           const meta = await metaRes.json();
-          console.log("ali", {
-            price: parseFloat(formatEther(item.price)),
-            tokenId: item.tokenId.toString(),
-            creator: item.creator,
-            isListed: item.isListed,
-            meta,
-          });
+
           nfts.push({
             price: parseFloat(formatEther(item.price)),
             tokenId: item.tokenId.toString(),
@@ -51,8 +42,25 @@ export const hookFactory: ListedNftsHookFactory =
       }
     );
 
+    const _contract = contract;
+    const buyNft = useCallback(
+      async (tokenId: number, value: number) => {
+        try {
+          const result = await _contract!.buyNft(tokenId, {
+            value: parseEther(value.toString()),
+          });
+          await result;
+          alert("you have bought Nft");
+        } catch (error: any) {
+          console.error("buyNft:", error);
+        }
+      },
+      [_contract]
+    );
+
     return {
       ...swr,
+      buyNft,
       data: data || [],
     };
   };

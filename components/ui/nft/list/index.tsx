@@ -1,20 +1,17 @@
 import React, { FunctionComponent } from "react";
 import NftItem from "../item";
-import { Nft } from "@/types/nft";
+import { useListedNfts } from "@/components/hooks/web3/useListedNfts";
 
-type NftListProps = {
-  nfts: Nft[] ;
-};
-
-const NftList: FunctionComponent<NftListProps> = ({ nfts }) => {
+const NftList: FunctionComponent = () => {
+  const { nfts } = useListedNfts();
   return (
     <div className="mt-12 max-w-lg mx-auto grid gap-5 lg:grid-cols-3 lg:max-w-none">
-      {nfts.map((nft, key) => (
+      {nfts.data?.map((nft, key) => (
         <div
           key={key}
           className="flex flex-col rounded-lg shadow-lg overflow-hidden"
         >
-          <NftItem item={nft} />
+          <NftItem item={nft} buyNft={nfts.buyNft} />
         </div>
       ))}
     </div>

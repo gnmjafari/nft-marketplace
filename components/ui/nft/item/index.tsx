@@ -4,9 +4,10 @@ import React, { FunctionComponent } from "react";
 
 type NftItemProps = {
   item: Nft;
+  buyNft: (tokenId: number, value: number) => void;
 };
 
-const NftItem: FunctionComponent<NftItemProps> = ({ item }) => {
+const NftItem: FunctionComponent<NftItemProps> = ({ item, buyNft }) => {
   return (
     <div className="card bg-base-100 w-80 shadow-xl">
       <figure>
@@ -28,7 +29,14 @@ const NftItem: FunctionComponent<NftItemProps> = ({ item }) => {
           ))}
         </div>
         <div className="card-actions justify-start">
-          <button className="btn btn-sm btn-primary">Buy Now</button>
+          <button
+            onClick={() => {
+              buyNft(item.tokenId, item.price);
+            }}
+            className="btn btn-sm btn-primary"
+          >
+            Buy Now
+          </button>
         </div>
       </div>
     </div>

@@ -36,7 +36,7 @@ const setGlobalListeners = (ethereum: MetaMaskInpageProvider) => {
 
 const removeGlobalListeners = (ethereum: MetaMaskInpageProvider) => {
   ethereum?.removeListener("chainChanged", pageReload);
-  ethereum?.removeListener("accountsChanged", handleAccount(ethereum));
+  ethereum?.removeListener("accountsChanged", handleAccount);
 };
 
 type props = {
@@ -57,7 +57,7 @@ export const Web3Provider: FunctionComponent<props> = ({ children }) => {
         const signer = await provider.getSigner();
         const signedContract = contract.connect(signer);
 
-        setGlobalListeners(window.ethereum);
+        setTimeout(() => setGlobalListeners(window.ethereum), 500);
         setWeb3Api(
           createWeb3State({
             ethereum: window.ethereum,
@@ -66,15 +66,18 @@ export const Web3Provider: FunctionComponent<props> = ({ children }) => {
             isLoading: false,
           })
         );
-      } catch (error: any) {
-        console.error("Please, install Web3 wallet");
+      } catch (e: any) {
+        console.error("Please, install web3 wallet");
         setWeb3Api((api) =>
-          createWeb3State({ ...(api as any), isLoading: false })
+          createWeb3State({
+            ...(api as any),
+            isLoading: false,
+          })
         );
       }
     }
-    initWeb3();
 
+    initWeb3();
     return () => removeGlobalListeners(window.ethereum);
   }, []);
 

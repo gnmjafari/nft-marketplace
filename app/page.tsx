@@ -1,13 +1,8 @@
 "use client";
 import { NextPage } from "next";
 import { BaseLayout, NftList } from "@ui";
-import { useListedNfts } from "@/components/hooks/web3/useListedNfts";
-import { Nft } from "@/types/nft";
 
 const Home: NextPage = () => {
-  const { nfts } = useListedNfts();
-  console.log("nfts", nfts.data);
-
   return (
     <BaseLayout>
       <div className="relative">
@@ -19,7 +14,7 @@ const Home: NextPage = () => {
             Mint a NFT to get unlimited ownership forever!
           </p>
         </div>
-        <NftList nfts={nfts.data as Nft[]} />
+        <NftList />
       </div>
     </BaseLayout>
   );

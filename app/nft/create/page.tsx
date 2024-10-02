@@ -1,7 +1,69 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+"use client";
+import { useWeb3 } from "@/components/providers/web3/web3";
+import { nftMeta } from "@/types/nft";
 import { BaseLayout } from "@ui";
+import axios from "axios";
 import { NextPage } from "next";
+import { ChangeEvent, useState } from "react";
 
 const NftCreate: NextPage = () => {
+  const { ethereum } = useWeb3();
+  const [nftMeta, setNftMeta] = useState<nftMeta>({
+    name: "",
+    description: "",
+    image: "",
+    attributes: [
+      { trait_type: "attack", value: "0" },
+      { trait_type: "health", value: "0" },
+      { trait_type: "speed", value: "0" },
+    ],
+  });
+
+  const handleChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
+
+    setNftMeta({ ...nftMeta, [name]: value });
+  };
+
+  const handleAttributeChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    const attributesIdx = nftMeta.attributes.findIndex(
+      (attr) => attr.trait_type === name
+    );
+    nftMeta.attributes[attributesIdx].value = value;
+
+    setNftMeta({ ...nftMeta, attributes: nftMeta.attributes });
+  };
+
+  const createNft = async () => {
+    try {
+      const response = await axios.get("/api/verify");
+      const accounts = (await ethereum?.request({
+        method: "eth_requestAccounts",
+      })) as string[];
+      const account = accounts[0];
+
+      const signedData = await ethereum?.request({
+        method: "personal_sign",
+        params: [JSON.stringify(response.data), account, response.data.id],
+      });
+
+      await axios.post(
+        "/api/verify",
+        JSON.stringify({
+          address: account,
+          signature: signedData,
+          nft: nftMeta,
+        })
+      );
+    } catch (error: any) {
+      console.error("createNft:", error.message);
+    }
+  };
+
   return (
     <BaseLayout>
       <div className="w-full flex justify-center items-center gap-5">
@@ -11,6 +73,9 @@ const NftCreate: NextPage = () => {
               <span className="label-text">Name</span>
             </div>
             <input
+              name="name"
+              value={nftMeta.name}
+              onChange={handleChange}
               type="text"
               placeholder="My NFT"
               className="input input-bordered w-full max-w-xs input-sm"
@@ -21,6 +86,9 @@ const NftCreate: NextPage = () => {
               <span className="label-text">Description</span>
             </div>
             <textarea
+              name="description"
+              value={nftMeta.description}
+              onChange={handleChange}
               rows={2}
               className="textarea textarea-bordered h-12"
               placeholder="some NFT description..."
@@ -28,41 +96,33 @@ const NftCreate: NextPage = () => {
           </label>
           <label className="form-control w-full max-w-xs">
             <div className="label">
-              <span className="label-text">Cover photo</span>
+              <span className="label-text">Image</span>
             </div>
             <input
+              name="image"
+              value={nftMeta.image}
+              onChange={handleChange}
               type="file"
               className="file-input file-input-bordered w-full max-w-xs "
             />
           </label>
           <div className="flex justify-between items-center gap-5">
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Health</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs input-sm"
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Attach</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs input-sm"
-              />
-            </label>
-            <label className="form-control w-full max-w-xs">
-              <div className="label">
-                <span className="label-text">Speed</span>
-              </div>
-              <input
-                type="text"
-                className="input input-bordered w-full max-w-xs input-sm"
-              />
-            </label>
+            {nftMeta.attributes.map((attribute, key) => {
+              return (
+                <label key={key} className="form-control w-full max-w-xs">
+                  <div className="label">
+                    <span className="label-text">{attribute.trait_type}</span>
+                  </div>
+                  <input
+                    name={attribute.trait_type}
+                    onChange={handleAttributeChange}
+                    value={attribute.value}
+                    type="text"
+                    className="input input-bordered w-full max-w-xs input-sm"
+                  />
+                </label>
+              );
+            })}
           </div>
           <div className="flex items-center justify-between gap-5">
             <div className="form-control w-72">
@@ -77,7 +137,12 @@ const NftCreate: NextPage = () => {
                 </span>
               </label>
             </div>
-            <button className="btn w-20 btn-primary ml-auto mt-2">Save</button>
+            <button
+              onClick={createNft}
+              className="btn w-20 btn-primary ml-auto mt-2"
+            >
+              Save
+            </button>
           </div>
         </div>
       </div>

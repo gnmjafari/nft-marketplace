@@ -15,7 +15,6 @@ const Navbar: FunctionComponent = () => {
   const pathname = usePathname();
   const { account } = useAccount();
   const { network } = useNetwork();
-  console.log("network :", network);
 
   return (
     <div className="navbar bg-gray-800">

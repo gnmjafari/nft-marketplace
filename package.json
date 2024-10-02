@@ -12,19 +12,23 @@
   "dependencies": {
     "@metamask/providers": "^17.2.0",
     "@openzeppelin/contracts": "^5.0.2",
+    "axios": "^1.7.7",
     "ethers": "^6.13.2",
     "ganache": "^7.9.2",
+    "iron-session": "^8.0.3",
     "next": "14.2.9",
     "react": "^18",
     "react-dom": "^18",
     "swr": "^2.2.5",
     "truffle": "^5.11.5",
+    "uuid": "^10.0.0",
     "web3": "^4.12.1"
   },
   "devDependencies": {
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^10.0.0",
     "daisyui": "^4.12.10",
     "eslint": "^8",
     "eslint-config-next": "14.2.9",

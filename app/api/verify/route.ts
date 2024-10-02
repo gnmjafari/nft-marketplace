@@ -3,12 +3,15 @@ import { cookies } from "next/headers";
 import {
   addressCheckMiddleware,
   contractAddress,
+  pinataApiKey,
+  pinataSecretApiKey,
   SessionData,
   sessionOptions,
 } from "../utils";
 import { getIronSession } from "iron-session";
 import { nftMeta } from "@/types/nft";
 import { NextRequest } from "next/server";
+import axios from "axios";
 
 export async function GET() {
   const session = await getIronSession<SessionData>(cookies(), sessionOptions);
@@ -20,9 +23,6 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const session = await getIronSession<SessionData>(cookies(), sessionOptions);
-  console.log("alijafari", session);
-
   try {
     const reqData = await req.json();
     const nft = reqData.nft as nftMeta;
@@ -34,9 +34,31 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    await addressCheckMiddleware();
+    await addressCheckMiddleware({
+      address: reqData.address,
+      signature: reqData.signature,
+    });
 
-    return Response.json({ message: "Nft has been created" }, { status: 200 });
+    const jsonRes = await axios.post(
+      "https://api.pinata.cloud/pinning/pinJSONToIPFS",
+      {
+        pinataMetadata: {
+          name: uuidv4(),
+        },
+        pinataContent: nft,
+      },
+      {
+        headers: {
+          pinata_api_key: pinataApiKey,
+          pinata_secret_api_key: pinataSecretApiKey,
+        },
+      }
+    );
+
+    return Response.json(
+      { message: "Nft has been created", data: jsonRes.data },
+      { status: 200 }
+    );
   } catch {
     return Response.json({ message: "Cannot create JSON" }, { status: 422 });
   }

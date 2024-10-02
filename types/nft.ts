@@ -22,3 +22,11 @@ export type NftCore = {
 export type Nft = {
   meta: nftMeta;
 } & NftCore;
+
+export type FileReq = {
+  bytes: Uint8Array;
+  fileName: string;
+  contentType: string;
+  address: string;
+  signature: string;
+};

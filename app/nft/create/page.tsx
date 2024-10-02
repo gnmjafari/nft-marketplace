@@ -38,18 +38,53 @@ const NftCreate: NextPage = () => {
     setNftMeta({ ...nftMeta, attributes: nftMeta.attributes });
   };
 
+  const getSignedData = async () => {
+    const response = await axios.get("/api/verify");
+    const accounts = (await ethereum?.request({
+      method: "eth_requestAccounts",
+    })) as string[];
+    const account = accounts[0];
+
+    const signedData = await ethereum?.request({
+      method: "personal_sign",
+      params: [JSON.stringify(response.data), account, response.data.id],
+    });
+
+    return { signedData, account };
+  };
+
+  const handleImage = async (e: ChangeEvent<HTMLInputElement>) => {
+    if (!e.target.files || e.target.files.length === 0) {
+      console.error("Select a file");
+      return;
+    }
+
+    const file = e.target.files[0];
+    const buffer = await file.arrayBuffer();
+    const bytes = new Uint8Array(buffer);
+
+    try {
+      const { signedData, account } = await getSignedData();
+      await axios.post(
+        "/api/verify-image",
+        JSON.stringify({
+          address: account,
+          signature: signedData,
+          bytes,
+          contentType: file.type,
+          fileName: file.name.replace(/\.[^/.]$/, ""),
+        })
+      );
+    } catch (error) {
+      console.error("getSignedData ERR:", error);
+    }
+
+    console.log("bytes", bytes);
+  };
+
   const createNft = async () => {
     try {
-      const response = await axios.get("/api/verify");
-      const accounts = (await ethereum?.request({
-        method: "eth_requestAccounts",
-      })) as string[];
-      const account = accounts[0];
-
-      const signedData = await ethereum?.request({
-        method: "personal_sign",
-        params: [JSON.stringify(response.data), account, response.data.id],
-      });
+      const { signedData, account } = await getSignedData();
 
       await axios.post(
         "/api/verify",
@@ -101,7 +136,7 @@ const NftCreate: NextPage = () => {
             <input
               name="image"
               value={nftMeta.image}
-              onChange={handleChange}
+              onChange={handleImage}
               type="file"
               className="file-input file-input-bordered w-full max-w-xs "
             />

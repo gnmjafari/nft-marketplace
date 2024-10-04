@@ -38,6 +38,7 @@ export const hookFactory: AccountHookFactory =
         console.error("Please, connect to Web3 wallet");
       } else if (accounts[0] !== data?.address) {
         mutate(accounts[0] as JsonRpcSigner);
+        window.location.reload();
       }
     };
 

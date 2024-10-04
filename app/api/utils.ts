@@ -40,6 +40,11 @@ export function sleep(ms: number) {
   return new Promise((resolve) => setTimeout(resolve, ms));
 }
 
+const url =
+  process.env.NODE_ENV == "production"
+    ? process.env.INFURA_SEPOLIA_URL
+    : "http://127.0.0.1:7545";
+
 export const addressCheckMiddleware = async (
   reqData: addressCheckMiddlewareProps
 ) => {
@@ -50,7 +55,7 @@ export const addressCheckMiddleware = async (
     );
 
     // access to contract
-    const provider = new JsonRpcProvider("http://127.0.0.1:7545");
+    const provider = new JsonRpcProvider(url);
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const contract = new Contract(
       contractAddress,

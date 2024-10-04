@@ -30,3 +30,10 @@ export type FileReq = {
   address: string;
   signature: string;
 };
+
+export type PinataRes = {
+  IpfsHash: Uint8Array;
+  PinSize: number;
+  Timestamp: string;
+  isDuplicate: boolean;
+};

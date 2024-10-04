@@ -3,7 +3,7 @@ const NftMarket = artifacts.require("NftMarket");
 contract("NftMarket", (accounts) => {
   let _contract = null;
   let _nftPrice = web3.utils.toWei("0.3", "ether");
-  let _listingPrice = web3.utils.toWei("0.25", "ether");
+  let _listingPrice = web3.utils.toWei("0.025", "ether");
 
   before(async () => {
     _contract = await NftMarket.deployed();

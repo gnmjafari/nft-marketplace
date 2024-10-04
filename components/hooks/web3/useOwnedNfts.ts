@@ -51,7 +51,7 @@ export const hookFactory: OwnedNftsHookFactory =
             tokenId,
             parseEther(price.toString()),
             {
-              value: parseEther((0.25).toString()),
+              value: parseEther((0.025).toString()),
             }
           );
 

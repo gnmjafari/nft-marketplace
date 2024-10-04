@@ -11,7 +11,7 @@ contract NftMarket is ERC721URIStorage, Ownable {
     uint256 private _tokenIds;
     uint256[] private _allNfts;
 
-    uint public listingPrice = 0.25 ether;
+    uint public listingPrice = 0.025 ether;
 
     mapping(string => bool) private _usedTokenURIs;
     mapping(uint => NftItem) private _idToNftItem;

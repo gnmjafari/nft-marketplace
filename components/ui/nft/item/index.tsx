@@ -8,12 +8,28 @@ type NftItemProps = {
 };
 
 const NftItem: FunctionComponent<NftItemProps> = ({ item, buyNft }) => {
+  const showAddress = (address: string) => {
+    return `0x****${address.slice(-4)}`;
+  };
   return (
     <div className="card bg-base-100 w-80 shadow-xl">
       <figure>
         <img src={item.meta.image} alt="Shoes" />
       </figure>
       <div className="card-body">
+        <div className="flex items-center justify-start gap-3">
+          <div className="avatar placeholder">
+            <div className="bg-neutral text-neutral-content w-8 rounded-full">
+              <img src="/images/Avatar.png" alt="Avatar" />
+            </div>
+          </div>
+
+          <span>Creator:</span>
+          <div className="badge badge-primary badge-outline ml-auto">
+            {showAddress(item.creator)}
+          </div>
+        </div>
+
         <h2 className="card-title">{item.meta.name}</h2>
         <p className="truncate ">{item.meta.description}</p>
         <div className="flex justify-between">

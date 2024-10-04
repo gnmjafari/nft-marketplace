@@ -129,8 +129,9 @@ const NftCreate: NextPage = () => {
 
   const createNft = async () => {
     try {
-      const nftRes = await axios.get(nftURI);
-      const content = nftRes.data;
+      const nftRes = await fetch(`/api/fetch?fetchUrl=${nftURI}`);
+      const content = await nftRes.json();
+
       Object.keys(content).forEach((key) => {
         if (!ALLOWED_FIELDS.includes(key)) {
           throw new Error("Invalid json structure");

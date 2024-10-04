@@ -15,7 +15,7 @@ const NftItem: FunctionComponent<NftItemProps> = ({ item, buyNft }) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{item.meta.name}</h2>
-        <p>{item.meta.description}</p>
+        <p className="truncate ">{item.meta.description}</p>
         <div className="flex justify-between">
           <div className="flex flex-col py-4">
             <dt>Price</dt>

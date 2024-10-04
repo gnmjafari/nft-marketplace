@@ -55,10 +55,7 @@ export async function POST(req: NextRequest) {
       }
     );
 
-    return Response.json(
-      { message: "Nft has been created", data: jsonRes.data },
-      { status: 200 }
-    );
+    return Response.json(jsonRes.data, { status: 200 });
   } catch {
     return Response.json({ message: "Cannot create JSON" }, { status: 422 });
   }

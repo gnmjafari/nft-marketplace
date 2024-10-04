@@ -1,8 +1,10 @@
 "use client";
 import { NextPage } from "next";
 import { BaseLayout, NftList } from "@ui";
+import { useNetwork } from "@/components/hooks/web3/useNetwork";
 
 const Home: NextPage = () => {
+  const { network } = useNetwork();
   return (
     <BaseLayout>
       <div className="relative">
@@ -14,7 +16,31 @@ const Home: NextPage = () => {
             Mint a NFT to get unlimited ownership forever!
           </p>
         </div>
-        <NftList />
+        {network.isConnectedToNetwork ? (
+          <NftList />
+        ) : (
+          <div className="flex items-center justify-center mt-5">
+            <div className="card bg-neutral text-neutral-content w-96">
+              <div className="card-body items-center text-center">
+                <h2 className="card-title">
+                  <span className="loading loading-ring loading-md" />
+                  Attention needed
+                  <span className="loading loading-ring loading-md" />
+                </h2>
+
+                {network.isLoading ? (
+                  <div className="card-actions justify-end">
+                    <span className="loading loading-dots loading-lg" />
+                  </div>
+                ) : (
+                  <div className="badge badge-warning badge-outline">
+                    Please, Connect to {network.targetNetwork}
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </BaseLayout>
   );

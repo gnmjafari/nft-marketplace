@@ -147,6 +147,19 @@ const NftCreate: NextPage = () => {
         success: "NFT was created successfully",
         error: "There was a problem creating the NFT, please try again",
       });
+
+      setNftURI("");
+      setPrice("");
+      setNftMeta({
+        name: "",
+        description: "",
+        image: "",
+        attributes: [
+          { trait_type: "attack", value: "0" },
+          { trait_type: "health", value: "0" },
+          { trait_type: "speed", value: "0" },
+        ],
+      });
     } catch (error) {
       console.error("createNft:", error);
     }

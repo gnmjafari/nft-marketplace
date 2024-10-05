@@ -5,7 +5,7 @@ This is a [Next.js](https://nextjs.org/) project. Full process and video lecture
 
 Marketplace has dependencies on multiple technologies.
 
-[Live Demo]([https://rpschallenges.netlify.app/](https://nft-marketplace-ochre-three.vercel.app/)): It is better to use VPN
+[Live Demo](https://nft-marketplace-ochre-three.vercel.app/) : It is better to use VPN
 
 * [Pinata](https://app.pinata.cloud/) - store images, and NFT metadata
 * [Ganache](https://trufflesuite.com/ganache/) - private Blockchain, to run application localy

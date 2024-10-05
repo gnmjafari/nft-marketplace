@@ -13,10 +13,9 @@ module.exports = {
     sepolia: {
       provider: () =>
         new HDWalletProvider(keys.DEPLOYER_KEY, keys.INFURA_SEPOLIA_URL),
-      network_id: "11155111",
-      gasPrice: 2500000000,
-      networkCheckoutTimeout: 10000,
-      timeoutBlocks: 200,
+      network_id: 11155111,
+      gasPrice: 210220890559,
+      networkCheckoutTimeout: 50000,
     },
   },
   compilers: {

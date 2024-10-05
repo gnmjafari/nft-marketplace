@@ -1,8 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   ContractTransaction,
-  ContractInterface,
   BytesLike as Arrayish,
-  BigNumber,
   BigNumberish,
 } from 'ethers';
 import { EthersContractContextV5 } from 'ethereum-abi-types-generator';
@@ -29,7 +28,7 @@ export interface ContractTransactionOverrides {
   /**
    * The price (in wei) per unit of gas
    */
-  gasPrice?: BigNumber | string | number | Promise<any>;
+  gasPrice?: BigNumberish | string | number | Promise<any>;
   /**
    * The nonce to use in the transaction
    */
@@ -37,7 +36,7 @@ export interface ContractTransactionOverrides {
   /**
    * The amount to send with the transaction (i.e. msg.value)
    */
-  value?: BigNumber | string | number | Promise<any>;
+  value?: BigNumberish | string | number | Promise<any>;
   /**
    * The chain ID (or network ID) to use
    */
@@ -135,10 +134,10 @@ export interface TransferEventEmittedResponse {
   tokenId: BigNumberish;
 }
 export interface NftitemResponse {
-  tokenId: BigNumber;
-  0: BigNumber;
-  price: BigNumber;
-  1: BigNumber;
+  tokenId: BigNumberish;
+  0: BigNumberish;
+  price: BigNumberish;
+  1: BigNumberish;
   creator: string;
   2: string;
   isListed: boolean;
@@ -175,7 +174,7 @@ export interface NftMarketContract {
   balanceOf(
     owner: string,
     overrides?: ContractCallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<BigNumberish>;
   /**
    * Payable: false
    * Constant: true
@@ -206,7 +205,7 @@ export interface NftMarketContract {
    * StateMutability: view
    * Type: function
    */
-  listingPrice(overrides?: ContractCallOverrides): Promise<BigNumber>;
+  listingPrice(overrides?: ContractCallOverrides): Promise<BigNumberish>;
   /**
    * Payable: false
    * Constant: true
@@ -369,7 +368,7 @@ export interface NftMarketContract {
    * StateMutability: view
    * Type: function
    */
-  totalSupply(overrides?: ContractCallOverrides): Promise<BigNumber>;
+  totalSupply(overrides?: ContractCallOverrides): Promise<BigNumberish>;
   /**
    * Payable: false
    * Constant: true
@@ -380,7 +379,7 @@ export interface NftMarketContract {
   tokenByIndex(
     index: BigNumberish,
     overrides?: ContractCallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<BigNumberish>;
   /**
    * Payable: false
    * Constant: true
@@ -393,7 +392,7 @@ export interface NftMarketContract {
     owner: string,
     index: BigNumberish,
     overrides?: ContractCallOverrides
-  ): Promise<BigNumber>;
+  ): Promise<BigNumberish>;
   /**
    * Payable: false
    * Constant: true
@@ -440,7 +439,7 @@ export interface NftMarketContract {
    * StateMutability: view
    * Type: function
    */
-  listedItemsCount(overrides?: ContractCallOverrides): Promise<BigNumber>;
+  listedItemsCount(overrides?: ContractCallOverrides): Promise<BigNumberish>;
   /**
    * Payable: true
    * Constant: false

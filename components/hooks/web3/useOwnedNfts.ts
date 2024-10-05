@@ -31,7 +31,7 @@ export const hookFactory: OwnedNftsHookFactory =
           const meta = await metaRes.json();
           nfts.push({
             price: parseFloat(formatEther(item.price)),
-            tokenId: item.tokenId.toString(),
+            tokenId: Number(item.tokenId),
             creator: item.creator,
             isListed: item.isListed,
             meta,

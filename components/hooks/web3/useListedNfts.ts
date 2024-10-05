@@ -33,7 +33,7 @@ export const hookFactory: ListedNftsHookFactory =
 
           nfts.push({
             price: parseFloat(formatEther(item.price)),
-            tokenId: item.tokenId.toString(),
+            tokenId: Number(item.tokenId),
             creator: item.creator,
             isListed: item.isListed,
             meta,

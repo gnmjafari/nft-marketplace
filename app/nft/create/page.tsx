@@ -269,6 +269,14 @@ const NftCreate: NextPage = () => {
                 </label>
               </div> */}
               <button
+                disabled={
+                  !nftMeta.name ||
+                  !nftMeta.description ||
+                  !nftMeta.image ||
+                  !nftMeta.attributes[0].value ||
+                  !nftMeta.attributes[1].value ||
+                  !nftMeta.attributes[2].value
+                }
                 onClick={uploadMetaData}
                 className="btn w-20 btn-primary ml-auto mt-2"
               >
@@ -308,6 +316,7 @@ const NftCreate: NextPage = () => {
               />
             </label>
             <button
+              disabled={!price}
               onClick={createNft}
               className="btn w-20 btn-primary ml-auto mt-2"
             >

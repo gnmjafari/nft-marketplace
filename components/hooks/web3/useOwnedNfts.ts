@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useHooks } from "@/components/providers/web3/web3";
 import { CryptoHookFactory } from "@/types/hooks";
 import { Nft } from "@/types/nft";
 import { formatEther, parseEther } from "ethers";
@@ -74,10 +73,3 @@ export const hookFactory: OwnedNftsHookFactory =
     };
   };
 
-export const useOwnedNfts = () => {
-  const hooks = useHooks();
-  const swrRes = hooks.useOwnedNfts();
-  return {
-    nfts: swrRes,
-  };
-};

@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useEffect } from "react";
-import { useHooks } from "@/components/providers/web3/web3";
 import { CryptoHookFactory } from "@/types/hooks";
 import useSWR from "swr";
 import { JsonRpcSigner } from "ethers";
@@ -67,11 +66,3 @@ export const hookFactory: AccountHookFactory =
       connect,
     };
   };
-
-export const useAccount = () => {
-  const hooks = useHooks();
-  const swrRes = hooks.useAccount();
-  return {
-    account: swrRes,
-  };
-};

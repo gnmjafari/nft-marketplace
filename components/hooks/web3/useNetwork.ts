@@ -1,5 +1,4 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useHooks } from "@/components/providers/web3/web3";
 import { CryptoHookFactory } from "@/types/hooks";
 import useSWR from "swr";
 
@@ -56,10 +55,3 @@ export const hookFactory: NetworkHookFactory =
     };
   };
 
-export const useNetwork = () => {
-  const hooks = useHooks();
-  const swrRes = hooks.useNetwork();
-  return {
-    network: swrRes,
-  };
-};

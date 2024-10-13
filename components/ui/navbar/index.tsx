@@ -2,9 +2,9 @@
 import { FunctionComponent } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useAccount } from "@/components/hooks/web3/useAccount";
+import { useAccount } from "@/components/hooks/web3";
 import WalletBar from "./WalletBar";
-import { useNetwork } from "@/components/hooks/web3/useNetwork";
+import { useNetwork } from "@/components/hooks/web3";
 
 const navigation = [
   { name: "Marketplace", href: "/", current: true },

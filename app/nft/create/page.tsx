@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
-import { useNetwork } from "@/components/hooks/web3/useNetwork";
+import { useNetwork } from "@/components/hooks/web3";
 import { useWeb3 } from "@/components/providers/web3/web3";
 import { nftMeta, PinataRes } from "@/types/nft";
 import { BaseLayout } from "@ui";

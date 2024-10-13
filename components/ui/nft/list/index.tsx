@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from "react";
 import NftItem from "../item";
-import { useListedNfts } from "@/components/hooks/web3/useListedNfts";
+import { useListedNfts } from "@/components/hooks/web3";
 
 const NftList: FunctionComponent = () => {
   const { nfts } = useListedNfts();

@@ -1,5 +1,5 @@
 "use client";
-import { useOwnedNfts } from "@/components/hooks/web3/useOwnedNfts";
+import { useOwnedNfts } from "@/components/hooks/web3";
 import { Nft } from "@/types/nft";
 import { BaseLayout } from "@ui";
 import { NextPage } from "next";

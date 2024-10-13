@@ -1,12 +1,10 @@
 "use client";
 import { NextPage } from "next";
 import { BaseLayout, NftList } from "@ui";
-import { useNetwork } from "@/components/hooks/web3/useNetwork";
+import { useNetwork } from "@/components/hooks/web3";
 
 const Home: NextPage = () => {
   const { network } = useNetwork();
-
-  console.log("useNetwork()", useNetwork());
 
   return (
     <BaseLayout>

@@ -10,6 +10,12 @@ import {
   UseOwnedNftsHook,
 } from "./useOwnedNfts";
 
+console.log("createAccountHook", createAccountHook);
+console.log("createNetworkHook", createNetworkHook);
+console.log("createListedNftsHook", createListedNftsHook);
+console.log("createOwnedNftsHook", createOwnedNftsHook);
+
+
 export type Web3Hooks = {
   useAccount: UseAccountHook;
   useNetwork: UseNetworkHook;

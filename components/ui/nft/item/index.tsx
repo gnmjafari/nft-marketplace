@@ -37,7 +37,7 @@ const NftItem: FunctionComponent<NftItemProps> = ({ item, buyNft }) => {
             <dt>Price</dt>
             <dd className="font-bold text-indigo-700">{item.price} ETH</dd>
           </div>
-          {item.meta.attributes.map((attribute, key) => (
+          {item.meta.attributes?.map((attribute, key) => (
             <div key={key} className="flex flex-col py-4">
               <dt>{attribute.trait_type}</dt>
               <dd className="font-bold text-indigo-700">{attribute.value}</dd>

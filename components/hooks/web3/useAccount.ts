@@ -17,7 +17,7 @@ export type UseAccountHook = ReturnType<AccountHookFactory>;
 
 export const hookFactory: AccountHookFactory =
   ({ provider, ethereum, isLoading }) =>
-  () => {
+   () => {
     const { data, mutate, isValidating, ...swr } = useSWR(
       provider ? "web3/useAccount" : null,
       async () => {

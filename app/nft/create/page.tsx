@@ -90,7 +90,6 @@ const NftCreate: NextPage = () => {
         error: "Image upload error",
       });
       const data = res.data as PinataRes;
-      console.log("data", data);
 
       setNftMeta({
         ...nftMeta,

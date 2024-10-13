@@ -5,6 +5,9 @@ import { useNetwork } from "@/components/hooks/web3/useNetwork";
 
 const Home: NextPage = () => {
   const { network } = useNetwork();
+
+  console.log("useNetwork()", useNetwork());
+
   return (
     <BaseLayout>
       <div className="relative">

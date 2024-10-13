@@ -1,5 +1,4 @@
-This is a [Next.js](https://nextjs.org/) project. Full process and video lectures how to create the application can be found here: [NFT Marketplace in React, Typescript & Solidity - Full Guide
-](https://academy.eincode.com/courses/nft-marketplace-in-react-js-next-typescript-full-guide)
+This is a [Next.js](https://nextjs.org/) project
 
 ## Overview
 

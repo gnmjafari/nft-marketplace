@@ -1,10 +1,18 @@
+# Nft marketplace
+
+[Live Demo](https://nft-marketplace-ochre-three.vercel.app/)
+
+# image
+  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Home.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Nft-item.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Profile.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Create-nft.png?raw=true" style="width: 300px; height: auto;">
+
 This is a [Next.js](https://nextjs.org/) project
 
 ## Overview
 
 Marketplace has dependencies on multiple technologies.
-
-[Live Demo](https://nft-marketplace-ochre-three.vercel.app/) : It is better to use VPN
 
 * [Pinata](https://app.pinata.cloud/) - store images, and NFT metadata
 * [Ganache](https://trufflesuite.com/ganache/) - private Blockchain, to run application localy

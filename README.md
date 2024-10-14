@@ -5,10 +5,13 @@
 # image
 ## Home
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Home.png?raw=true" style="width: 300px; height: auto;">
+  
 ## Nft item
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Nft-item.png?raw=true" style="width: 300px; height: auto;">
+  
 ## Profile
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Profile.png?raw=true" style="width: 300px; height: auto;">
+  
 ## Create nft
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Create-nft.png?raw=true" style="width: 300px; height: auto;">
 

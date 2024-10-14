@@ -3,21 +3,21 @@
 [Live Demo](https://nft-marketplace-ochre-three.vercel.app/)
 
 # image
-## Home
+### Home
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Home.png?raw=true" style="width: 300px; height: auto;">
   
-## Nft item
+### Nft item
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Nft-item.png?raw=true" style="width: 300px; height: auto;">
   
-## Profile
+### Profile
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Profile.png?raw=true" style="width: 300px; height: auto;">
   
-## Create nft
+### Create nft
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Create-nft.png?raw=true" style="width: 300px; height: auto;">
 
-This is a [Next.js](https://nextjs.org/) project
-
 ## Overview
+
+This is a [Next.js](https://nextjs.org/) project
 
 Marketplace has dependencies on multiple technologies.
 

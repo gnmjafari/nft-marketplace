@@ -3,10 +3,10 @@
 [Live Demo](https://nft-marketplace-ochre-three.vercel.app/)
 
 # image
-  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Home.png?raw=true" style="width: 300px; height: auto;">
-  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Nft-item.png?raw=true" style="width: 300px; height: auto;">
-  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Profile.png?raw=true" style="width: 300px; height: auto;">
-  <img src="https://github.com/gnmjafari/nft-marketplace/tree/main/public/images/Create-nft.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Home.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Nft-item.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Profile.png?raw=true" style="width: 300px; height: auto;">
+  <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Create-nft.png?raw=true" style="width: 300px; height: auto;">
 
 This is a [Next.js](https://nextjs.org/) project
 

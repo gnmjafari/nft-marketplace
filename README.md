@@ -2,7 +2,6 @@
 
 [Live Demo](https://nft-marketplace-ochre-three.vercel.app/)
 
-# image
 ### Home
   <img src="https://github.com/gnmjafari/nft-marketplace/blob/main/public/images/Home.png?raw=true" style="width: 300px; height: auto;">
   
